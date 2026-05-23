@@ -29,6 +29,13 @@
       color: var(--cream);
       background: var(--ink);
       overflow-x: hidden;
+      opacity: 1;
+      animation: fadeInBody 0.8s ease-out;
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     body::before {
@@ -68,7 +75,19 @@
         radial-gradient(circle at 50% 18%, rgba(242, 207, 118, .2), transparent 35%),
         linear-gradient(135deg, rgba(19, 13, 9, .97), rgba(42, 22, 13, .98));
       backdrop-filter: blur(20px);
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      animation: fadeInAgeGate 0.6s ease-out;
+    }
+
+    @keyframes fadeInAgeGate {
+      from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+      }
+      to {
+        opacity: 1;
+        backdrop-filter: blur(20px);
+      }
     }
 
     .age-gate.hidden {
@@ -87,6 +106,18 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      animation: slideUpCard 0.7s ease-out 0.2s both;
+    }
+
+    @keyframes slideUpCard {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .age-card::before {
@@ -160,6 +191,18 @@
       backdrop-filter: blur(18px);
       background: rgba(16, 10, 7, .58);
       border-bottom: 1px solid rgba(242, 207, 118, .12);
+      animation: slideDownHeader 0.5s ease-out;
+    }
+
+    @keyframes slideDownHeader {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .logo {
@@ -170,6 +213,12 @@
       text-decoration: none;
       text-transform: uppercase;
       font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      text-shadow: 0 0 20px rgba(242, 207, 118, .4);
+      transform: scale(1.05);
     }
 
     nav { display: flex; align-items: center; gap: 24px; }
@@ -180,7 +229,7 @@
       font-size: .78rem;
       letter-spacing: .08em;
       text-transform: uppercase;
-      transition: color .25s ease, transform .25s ease;
+      transition: color .3s ease, transform .25s ease;
       position: relative;
     }
 
@@ -190,15 +239,39 @@
       left: 0;
       bottom: -8px;
       width: 0;
-      height: 1px;
-      background: var(--gold);
-      transition: width .25s ease;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      transition: width .35s ease;
     }
 
-    nav a:hover { color: var(--gold); transform: translateY(-2px); }
+    nav a:hover { 
+      color: var(--gold); 
+      transform: translateY(-3px);
+      text-shadow: 0 0 10px rgba(242, 207, 118, .3);
+    }
     nav a:hover::after { width: 100%; }
 
-    section { padding: 110px 7vw; }
+    section { 
+      padding: 110px 7vw;
+      opacity: 0;
+      animation: fadeInSection 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInSection {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section:nth-of-type(1) { animation-delay: 0.1s; }
+    section:nth-of-type(2) { animation-delay: 0.2s; }
+    section:nth-of-type(3) { animation-delay: 0.3s; }
+    section:nth-of-type(4) { animation-delay: 0.4s; }
 
     .btn {
       display: inline-flex;
@@ -207,18 +280,17 @@
       gap: 10px;
       padding: 15px 25px;
       border-radius: 999px;
-      border: 1px solid rgba(242, 207, 118, .5);
+      border: none;
       color: var(--ink);
       background: linear-gradient(135deg, var(--gold), var(--honey));
       text-decoration: none;
       font-weight: 800;
+      font-size: 1rem;
       box-shadow: 0 18px 45px rgba(216, 164, 65, .18);
-      transition: transform .25s ease, box-shadow .25s ease, letter-spacing .25s ease;
+      transition: transform .3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .3s ease, letter-spacing .25s ease;
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      border: none;
-      font-size: 1rem;
     }
 
     .btn::before {
@@ -234,18 +306,27 @@
     }
 
     .btn:hover {
-      transform: translateY(-4px) scale(1.025);
-      box-shadow: 0 26px 65px rgba(216, 164, 65, .28);
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 32px 75px rgba(216, 164, 65, .35);
       letter-spacing: .02em;
     }
 
     .btn:hover::before { left: 125%; }
+
+    .btn:active {
+      transform: translateY(-2px) scale(0.98);
+    }
 
     .btn.secondary {
       color: var(--cream);
       background: rgba(255, 255, 255, .04);
       border-color: rgba(255, 247, 232, .22);
       box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(242, 207, 118, .15);
+      box-shadow: 0 18px 45px rgba(242, 207, 118, .15);
     }
 
     .btn.play { animation: pulseGlow 2.6s ease-in-out infinite; }
@@ -277,7 +358,17 @@
       font-weight: 800;
     }
 
-    .eyebrow::before { content: ""; width: 36px; height: 1px; background: var(--gold); }
+    .eyebrow::before { 
+      content: ""; 
+      width: 36px; 
+      height: 1px; 
+      background: var(--gold);
+      transition: width 0.5s ease;
+    }
+
+    .eyebrow:hover::before {
+      width: 50px;
+    }
 
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; line-height: .95; }
     h1 { font-size: clamp(4rem, 9vw, 8.8rem); letter-spacing: -.055em; max-width: 850px; }
@@ -288,6 +379,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      transition: text-shadow 0.3s ease;
     }
 
     .hero p, .copy { color: rgba(255, 247, 232, .85); font-size: 1.08rem; line-height: 1.85; }
@@ -307,10 +399,16 @@
       font-weight: 800;
       letter-spacing: .06em;
       text-transform: uppercase;
-      transition: transform .25s ease, background .25s ease, color .25s ease;
+      transition: transform .25s cubic-bezier(0.34, 1.56, 0.64, 1), background .25s ease, color .25s ease, border-color .25s ease;
     }
 
-    .chip-button:hover { transform: rotate(-2deg) translateY(-3px); background: rgba(242,207,118,.18); color: var(--gold); }
+    .chip-button:hover { 
+      transform: rotate(-3deg) translateY(-4px) scale(1.08);
+      background: rgba(242,207,118,.22);
+      color: var(--gold);
+      border-color: rgba(242, 207, 118, .5);
+      box-shadow: 0 8px 24px rgba(242, 207, 118, .15);
+    }
 
     .bottle-stage { position: relative; min-height: 620px; display: grid; place-items: center; }
 
@@ -336,6 +434,11 @@
       transform: rotate(-3deg);
       animation: floatBottle 5.8s ease-in-out infinite;
       will-change: transform;
+      transition: filter 0.3s ease;
+    }
+
+    .bottle:hover {
+      filter: drop-shadow(0 0 30px rgba(242, 207, 118, .2));
     }
 
     @keyframes floatBottle {
@@ -380,10 +483,10 @@
       text-align: center;
       padding: 24px;
       box-shadow: inset 0 0 0 1px rgba(157, 92, 34, .25);
-      transition: transform .3s ease;
+      transition: transform .3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .bottle:hover .label { transform: scale(1.04) rotate(1deg); }
+    .bottle:hover .label { transform: scale(1.06) rotate(2deg); }
     .label small { display: block; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); font-size: .62rem; font-weight: 800; margin-bottom: 12px; }
     .label strong { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem; line-height: .9; }
     .label span { display: block; margin-top: 14px; font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; color: #6b4323; font-weight: 800; }
@@ -399,6 +502,7 @@
       animation: drip 3.4s ease-in-out infinite;
       opacity: .9;
       will-change: transform;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .3));
     }
 
     @keyframes drip {
@@ -408,8 +512,26 @@
       100% { transform: translateY(150px) scale(.4); opacity: 0; }
     }
 
-    .ticker { overflow: hidden; border-top: 1px solid rgba(242,207,118,.18); border-bottom: 1px solid rgba(242,207,118,.18); background: rgba(255,255,255,.035); padding: 18px 0; white-space: nowrap; }
-    .ticker-track { display: inline-block; animation: ticker 24s linear infinite; color: rgba(255,247,232,.85); letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; font-weight: 800; will-change: transform; }
+    .ticker { 
+      overflow: hidden; 
+      border-top: 1px solid rgba(242,207,118,.18); 
+      border-bottom: 1px solid rgba(242,207,118,.18); 
+      background: rgba(255,255,255,.035); 
+      padding: 18px 0; 
+      white-space: nowrap;
+    }
+
+    .ticker-track { 
+      display: inline-block; 
+      animation: ticker 24s linear infinite; 
+      color: rgba(255,247,232,.85); 
+      letter-spacing: .12em; 
+      text-transform: uppercase; 
+      font-size: .8rem; 
+      font-weight: 800; 
+      will-change: transform; 
+    }
+
     .ticker-track span { margin: 0 28px; color: var(--gold); }
     @keyframes ticker { to { transform: translateX(-50%); } }
 
@@ -425,14 +547,31 @@
       border-radius: 30px;
       background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
       overflow: hidden;
-      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+      transition: transform .35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color .25s ease, background .25s ease;
       cursor: pointer;
     }
 
-    .card:hover { transform: translateY(-10px) rotate(.7deg); border-color: rgba(242,207,118,.45); background: linear-gradient(145deg, rgba(242,207,118,.13), rgba(255,255,255,.035)); }
-    .card::after { content: ""; position: absolute; width: 170px; height: 170px; border-radius: 50%; background: rgba(242,207,118,.08); right: -65px; bottom: -65px; transition: transform .3s ease; }
-    .card:hover::after { transform: scale(1.35); }
-    .card .number { color: var(--gold); font-weight: 900; margin-bottom: 45px; display: block; }
+    .card:hover { 
+      transform: translateY(-16px) rotate(.7deg) scale(1.03);
+      border-color: rgba(242,207,118,.55);
+      background: linear-gradient(145deg, rgba(242,207,118,.18), rgba(255,255,255,.045));
+      box-shadow: 0 32px 64px rgba(242, 207, 118, .12);
+    }
+
+    .card::after { 
+      content: ""; 
+      position: absolute; 
+      width: 170px; 
+      height: 170px; 
+      border-radius: 50%; 
+      background: rgba(242,207,118,.08); 
+      right: -65px; 
+      bottom: -65px; 
+      transition: transform .3s ease; 
+    }
+
+    .card:hover::after { transform: scale(1.45); }
+    .card .number { color: var(--gold); font-weight: 900; margin-bottom: 45px; display: block; font-size: 1.8rem; }
     .card h3 { font-size: 2rem; margin-bottom: 16px; line-height: 1; }
     .card p { color: rgba(255,247,232,.80); line-height: 1.7; margin: 0; }
 
@@ -448,15 +587,51 @@
       padding: 64px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
-    .product::before { content: "Bee Yourself"; position: absolute; right: -30px; bottom: -28px; font-family: 'Cormorant Garamond', serif; font-size: clamp(4rem, 10vw, 10rem); color: rgba(157,92,34,.07); font-weight: 700; white-space: nowrap; }
+    .product:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, .2);
+    }
+
+    .product::before { 
+      content: "Bee Yourself"; 
+      position: absolute; 
+      right: -30px; 
+      bottom: -28px; 
+      font-family: 'Cormorant Garamond', serif; 
+      font-size: clamp(4rem, 10vw, 10rem); 
+      color: rgba(157,92,34,.07); 
+      font-weight: 700; 
+      white-space: nowrap; 
+    }
+
     .product h2 { color: var(--espresso); }
     .product p { color: rgba(38,24,18,.80); }
 
     .flavor-notes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-    .note { padding: 10px 14px; border-radius: 999px; background: rgba(157,92,34,.1); color: #5c3217; font-weight: 900; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; transition: transform .25s ease, background .25s ease; cursor: pointer; }
-    .note:hover { transform: translateY(-4px) rotate(-2deg); background: rgba(216,164,65,.22); }
+
+    .note { 
+      padding: 10px 14px; 
+      border-radius: 999px; 
+      background: rgba(157,92,34,.1); 
+      color: #5c3217; 
+      font-weight: 900; 
+      font-size: .82rem; 
+      letter-spacing: .04em; 
+      text-transform: uppercase; 
+      transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .note:hover { 
+      transform: translateY(-6px) rotate(-2deg) scale(1.08);
+      background: rgba(216,164,65,.28);
+      border-color: rgba(216, 164, 65, .5);
+      box-shadow: 0 12px 24px rgba(216, 164, 65, .15);
+    }
 
     .glass-card {
       border-radius: 34px;
@@ -467,23 +642,79 @@
       display: grid;
       place-items: center;
       overflow: hidden;
-      transition: transform .35s ease;
+      transition: transform .4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .glass-card:hover { transform: perspective(900px) rotateY(-5deg) rotateX(3deg) scale(1.02); }
-    .glass-card::before { content: ""; width: 150px; height: 260px; border: 3px solid rgba(255,247,232,.75); border-top: 0; border-radius: 12px 12px 65px 65px; background: linear-gradient(to top, rgba(242,207,118,.55), rgba(242,207,118,.12) 52%, transparent 52%); transform: rotate(-8deg); }
-    .glass-card::after { content: "✦"; position: absolute; top: 48px; right: 58px; color: var(--gold); font-size: 3rem; animation: twinkle 1.8s ease-in-out infinite alternate; }
-    @keyframes twinkle { from { opacity: .35; transform: scale(.85); } to { opacity: 1; transform: scale(1.08); } }
+    .glass-card:hover { 
+      transform: perspective(1200px) rotateY(-8deg) rotateX(4deg) scale(1.04);
+    }
+
+    .glass-card::before { 
+      content: ""; 
+      width: 150px; 
+      height: 260px; 
+      border: 3px solid rgba(255,247,232,.75); 
+      border-top: 0; 
+      border-radius: 12px 12px 65px 65px; 
+      background: linear-gradient(to top, rgba(242,207,118,.55), rgba(242,207,118,.12) 52%, transparent 52%); 
+      transform: rotate(-8deg);
+      transition: transform 0.4s ease;
+    }
+
+    .glass-card:hover::before {
+      transform: rotate(-8deg) scale(1.12);
+    }
+
+    .glass-card::after { 
+      content: "✦"; 
+      position: absolute; 
+      top: 48px; 
+      right: 58px; 
+      color: var(--gold); 
+      font-size: 3rem; 
+      animation: twinkle 1.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle { 
+      from { opacity: .35; transform: scale(.85); } 
+      to { opacity: 1; transform: scale(1.08); } 
+    }
 
     .ritual { text-align: center; }
     .ritual h2 { max-width: 880px; margin: 0 auto 24px; }
     .ritual .copy { max-width: 760px; margin: 0 auto; }
     .steps { margin-top: 55px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
-    .step { padding: 28px 20px; border-radius: 28px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,247,232,.12); transition: transform .25s ease, background .25s ease; cursor: pointer; }
-    .step:hover { transform: translateY(-8px); background: rgba(242,207,118,.09); }
-    .step div { width: 54px; height: 54px; margin: 0 auto 18px; display: grid; place-items: center; border-radius: 50%; background: rgba(242,207,118,.14); color: var(--gold); font-weight: 900; transition: transform .35s ease; }
-    .step:hover div { transform: rotate(12deg) scale(1.1); }
+    .step { 
+      padding: 28px 20px; 
+      border-radius: 28px; 
+      background: rgba(255,255,255,.05); 
+      border: 1px solid rgba(255,247,232,.12); 
+      transition: all .35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+
+    .step:hover { 
+      transform: translateY(-14px) scale(1.05);
+      background: rgba(242,207,118,.13);
+      border-color: rgba(242, 207, 118, .4);
+      box-shadow: 0 24px 48px rgba(242, 207, 118, .1);
+    }
+
+    .step div { 
+      width: 54px; 
+      height: 54px; 
+      margin: 0 auto 18px; 
+      display: grid; 
+      place-items: center; 
+      border-radius: 50%; 
+      background: rgba(242,207,118,.14); 
+      color: var(--gold); 
+      font-weight: 900; 
+      transition: transform .35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .step:hover div { transform: rotate(20deg) scale(1.15); }
     .step h3 { font-size: 1.55rem; margin-bottom: 8px; }
     .step p { color: rgba(255,247,232,.75); line-height: 1.6; margin: 0; font-size: .93rem; }
 
@@ -497,14 +728,31 @@
       border-radius: 24px;
       text-align: left;
       text-decoration: none;
-      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+      transition: all .35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .dynamic-button strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 8px; }
-    .dynamic-button span { color: rgba(255,247,232,.75); line-height: 1.6; }
-    .dynamic-button:hover { transform: translateY(-8px) scale(1.015); background: rgba(242,207,118,.12); border-color: rgba(242,207,118,.55); }
+    .dynamic-button strong { 
+      display: block; 
+      font-family: 'Cormorant Garamond', serif; 
+      font-size: 1.8rem; 
+      margin-bottom: 8px; 
+    }
 
-    .cta { text-align: center; padding: 130px 7vw; background: radial-gradient(circle at center, rgba(242,207,118,.22), transparent 55%); }
+    .dynamic-button span { color: rgba(255,247,232,.75); line-height: 1.6; }
+
+    .dynamic-button:hover { 
+      transform: translateY(-12px) scale(1.02);
+      background: rgba(242,207,118,.16);
+      border-color: rgba(242,207,118,.65);
+      box-shadow: 0 28px 56px rgba(242, 207, 118, .12);
+    }
+
+    .cta { 
+      text-align: center; 
+      padding: 130px 7vw; 
+      background: radial-gradient(circle at center, rgba(242,207,118,.22), transparent 55%);
+    }
+
     .cta h2 { max-width: 880px; margin: 0 auto 28px; }
     .cta p { max-width: 650px; margin: 0 auto 34px; color: rgba(255,247,232,.85); line-height: 1.8; }
 
@@ -522,21 +770,28 @@
       min-width: 200px;
       padding: 15px 20px;
       border-radius: 999px;
-      border: 1px solid rgba(242, 207, 118, .3);
+      border: 1.5px solid rgba(242, 207, 118, .3);
       background: rgba(255, 255, 255, .08);
       color: var(--cream);
       font-size: 1rem;
-      transition: border-color .25s ease, background .25s ease;
+      transition: all .3s ease;
+      font-family: 'Inter', sans-serif;
     }
 
     .signup-form input::placeholder {
       color: rgba(255, 247, 232, .5);
+      font-style: italic;
     }
 
     .signup-form input:focus {
       outline: none;
-      border-color: rgba(242, 207, 118, .8);
-      background: rgba(255, 255, 255, .12);
+      border-color: rgba(242, 207, 118, .9);
+      background: rgba(255, 255, 255, .14);
+      box-shadow: 0 0 20px rgba(242, 207, 118, .15);
+    }
+
+    .signup-form input:valid {
+      border-color: rgba(144, 238, 144, .5);
     }
 
     .signup-form button {
@@ -547,17 +802,76 @@
       margin-top: 16px;
       font-size: 0.9rem;
       min-height: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .form-message.show {
+      opacity: 1;
     }
 
     .form-message.success {
       color: #90EE90;
+      animation: slideInSuccess 0.4s ease-out;
     }
 
     .form-message.error {
       color: #FF6B6B;
+      animation: slideInError 0.4s ease-out;
     }
 
-    footer { padding: 36px 7vw; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; border-top: 1px solid rgba(242,207,118,.14); color: rgba(255,247,232,.70); font-size: .88rem; }
+    @keyframes slideInSuccess {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInError {
+      0% {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      50% {
+        transform: translateX(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    footer { 
+      padding: 36px 7vw; 
+      display: flex; 
+      justify-content: space-between; 
+      flex-wrap: wrap; 
+      gap: 16px; 
+      border-top: 1px solid rgba(242,207,118,.14); 
+      color: rgba(255,247,232,.70); 
+      font-size: .88rem;
+      transition: color 0.3s ease;
+    }
+
+    footer:hover {
+      color: rgba(255,247,232,.85);
+    }
+
+    /* Scroll reveal effect */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s ease-out;
+    }
 
     @media (max-width: 980px) {
       header { padding: 18px 5vw; }
@@ -666,7 +980,7 @@
       </div>
     </div>
 
-    <section id="story" class="intro">
+    <section id="story" class="intro scroll-reveal">
       <div>
         <div class="eyebrow">The story</div>
         <h2>Not flavored. Finished.</h2>
@@ -682,17 +996,17 @@
       </div>
     </section>
 
-    <section id="craft">
+    <section id="craft" class="scroll-reveal">
       <div class="eyebrow">The craft</div>
       <h2>Premium is in the balance.</h2>
       <div class="cards">
-        <article class="card"><span class="number">01</span><h3>Selected rum</h3><p>A smooth rum spirit base gives Aurora its warmth, structure, and depth.</p></article>
-        <article class="card"><span class="number">02</span><h3>Real honey</h3><p>Honey is used as a finishing signature, not a candy-like cover-up.</p></article>
-        <article class="card"><span class="number">03</span><h3>Puerto Rican formulation</h3><p>The final blend is crafted and made in Puerto Rico with a modern luxury point of view.</p></article>
+        <article class="card scroll-reveal"><span class="number">01</span><h3>Selected rum</h3><p>A smooth rum spirit base gives Aurora its warmth, structure, and depth.</p></article>
+        <article class="card scroll-reveal"><span class="number">02</span><h3>Real honey</h3><p>Honey is used as a finishing signature, not a candy-like cover-up.</p></article>
+        <article class="card scroll-reveal"><span class="number">03</span><h3>Puerto Rican formulation</h3><p>The final blend is crafted and made in Puerto Rico with a modern luxury point of view.</p></article>
       </div>
     </section>
 
-    <section id="taste" class="product">
+    <section id="taste" class="product scroll-reveal">
       <div>
         <div class="eyebrow">Tasting profile</div>
         <h2>Smooth, golden, and quietly bold.</h2>
@@ -708,19 +1022,19 @@
       <div class="glass-card" aria-label="Glass of honey finished rum"></div>
     </section>
 
-    <section id="ritual" class="ritual">
+    <section id="ritual" class="ritual scroll-reveal">
       <div class="eyebrow">The ritual</div>
       <h2>Pour it slow. Let it glow.</h2>
       <p class="copy">Aurora is made for elevated moments: neat, over one large cube, or as the golden signature in a premium cocktail.</p>
       <div class="steps">
-        <div class="step"><div>1</div><h3>Pour</h3><p>Serve neat or over one large cube.</p></div>
-        <div class="step"><div>2</div><h3>Glow</h3><p>Let the honey finish open in the glass.</p></div>
-        <div class="step"><div>3</div><h3>Mix</h3><p>Use in tropical, citrus, or coffee cocktails.</p></div>
-        <div class="step"><div>4</div><h3>Share</h3><p>Made for golden-hour moments and premium gatherings.</p></div>
+        <div class="step scroll-reveal"><div>1</div><h3>Pour</h3><p>Serve neat or over one large cube.</p></div>
+        <div class="step scroll-reveal"><div>2</div><h3>Glow</h3><p>Let the honey finish open in the glass.</p></div>
+        <div class="step scroll-reveal"><div>3</div><h3>Mix</h3><p>Use in tropical, citrus, or coffee cocktails.</p></div>
+        <div class="step scroll-reveal"><div>4</div><h3>Share</h3><p>Made for golden-hour moments and premium gatherings.</p></div>
       </div>
     </section>
 
-    <section id="contact" class="cta">
+    <section id="contact" class="cta scroll-reveal">
       <div class="eyebrow">Coming soon</div>
       <h2>Join the golden list.</h2>
       <p>Be first to hear about tastings, launch drops, cocktail previews, and Aurora Craft Co. experiences in Puerto Rico.</p>
@@ -747,7 +1061,7 @@
     const ageGate = document.getElementById('age-gate');
     const ageConfirm = document.getElementById('age-confirm');
     const STORAGE_KEY = 'aurora_age_verified';
-    const VERIFICATION_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    const VERIFICATION_DURATION = 24 * 60 * 60 * 1000;
 
     function verifyAge() {
       const expirationTime = Date.now() + VERIFICATION_DURATION;
@@ -774,14 +1088,31 @@
       verifyAge();
     });
 
-    // Fallback: Show age gate on page load if not verified
     document.addEventListener('DOMContentLoaded', () => {
       checkAgeVerification();
       
-      // Set focus to age gate when it's visible
       if (!ageGate.classList.contains('hidden')) {
         ageConfirm.focus();
       }
+    });
+
+    // Scroll Reveal Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
     });
 
     // Email Signup Form
@@ -793,41 +1124,38 @@
       
       const emailInput = signupForm.querySelector('input[type="email"]');
       const email = emailInput.value.trim();
+      const submitButton = signupForm.querySelector('button[type="submit"]');
 
-      // Basic client-side validation
       if (!email) {
         showFormMessage('Please enter a valid email address.', 'error');
+        emailInput.focus();
         return;
       }
 
-      // Clear previous message
       formMessage.textContent = '';
+      submitButton.disabled = true;
 
       try {
         // Simulate form submission (replace with actual API endpoint)
-        // const response = await fetch('/api/signup', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({ email })
-        // });
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-        // For now, simulate success
         showFormMessage('✓ Successfully added to launch list! Check your email.', 'success');
         emailInput.value = '';
         
-        // Auto-clear message after 5 seconds
         setTimeout(() => {
-          formMessage.textContent = '';
+          formMessage.classList.remove('show');
         }, 5000);
       } catch (error) {
         showFormMessage('Error signing up. Please try again later.', 'error');
         console.error('Signup error:', error);
+      } finally {
+        submitButton.disabled = false;
       }
     });
 
     function showFormMessage(message, type) {
       formMessage.textContent = message;
-      formMessage.className = `form-message ${type}`;
+      formMessage.className = `form-message ${type} show`;
     }
 
     // Smooth scroll handling for fixed header
@@ -841,6 +1169,17 @@
             target.scrollIntoView({ behavior: 'smooth' });
           }
         }
+      });
+    });
+
+    // Cursor glow effect on premium elements
+    document.querySelectorAll('.btn, .card, .step, .note').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        el.style.setProperty('--mouse-x', x + 'px');
+        el.style.setProperty('--mouse-y', y + 'px');
       });
     });
   </script>
