@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-padding-top: 80px;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurora Craft Co. | Honey-Finished Rum</title>
+  <meta name="description" content="Aurora Craft Co. is a premium honey-finished rum spirit formulated and made in Puerto Rico." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #130d09;
+      --espresso: #261812;
+      --honey: #d8a441;
+      --gold: #f2cf76;
+      --cream: #fff7e8;
+      --sand: #e8d6b8;
+      --amber: #9d5c22;
+      --rose: #d97663;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--cream);
+      background: var(--ink);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(242, 207, 118, .25), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(217, 118, 99, .15), transparent 32%),
+        radial-gradient(circle at 50% 90%, rgba(157, 92, 34, .25), transparent 35%),
+        linear-gradient(135deg, #130d09 0%, #2a160d 50%, #0e0907 100%);
+      z-index: -3;
+      will-change: transform;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent 80%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .age-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(242, 207, 118, .2), transparent 35%),
+        linear-gradient(135deg, rgba(19, 13, 9, .97), rgba(42, 22, 13, .98));
+      backdrop-filter: blur(20px);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .age-gate.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .age-card {
+      width: min(620px, 100%);
+      padding: 48px;
+      border: 1px solid rgba(242, 207, 118, .25);
+      border-radius: 38px;
+      background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.025));
+      box-shadow: 0 35px 90px rgba(0,0,0,.45);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .age-card::before {
+      content: "18+";
+      position: absolute;
+      right: -12px;
+      bottom: -38px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 9rem;
+      color: rgba(242,207,118,.08);
+      font-weight: 700;
+    }
+
+    .age-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: .95;
+      margin: 0 0 18px;
+      background: linear-gradient(135deg, #fff7e8, #f2cf76 55%, #d97663);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .age-card p {
+      margin: 0 auto 28px;
+      max-width: 430px;
+      color: rgba(255,247,232,.85);
+      line-height: 1.75;
+    }
+
+    .age-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .floating-honey {
+      position: fixed;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(242, 207, 118, .18), transparent 68%);
+      filter: blur(8px);
+      animation: drift 12s ease-in-out infinite alternate;
+      z-index: -1;
+      will-change: transform;
+    }
+
+    .orb-one { top: 18%; left: -80px; }
+    .orb-two { bottom: 8%; right: -70px; animation-delay: 2s; }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(35px, -28px, 0) scale(1.12); }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7vw;
+      backdrop-filter: blur(18px);
+      background: rgba(16, 10, 7, .58);
+      border-bottom: 1px solid rgba(242, 207, 118, .12);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      letter-spacing: .12em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    nav { display: flex; align-items: center; gap: 24px; }
+
+    nav a {
+      color: rgba(255, 247, 232, .82);
+      text-decoration: none;
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .25s ease, transform .25s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width .25s ease;
+    }
+
+    nav a:hover { color: var(--gold); transform: translateY(-2px); }
+    nav a:hover::after { width: 100%; }
+
+    section { padding: 110px 7vw; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 25px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 207, 118, .5);
+      color: var(--ink);
+      background: linear-gradient(135deg, var(--gold), var(--honey));
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 18px 45px rgba(216, 164, 65, .18);
+      transition: transform .25s ease, box-shadow .25s ease, letter-spacing .25s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -90%;
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: skewX(-20deg);
+      transition: left .55s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.025);
+      box-shadow: 0 26px 65px rgba(216, 164, 65, .28);
+      letter-spacing: .02em;
+    }
+
+    .btn:hover::before { left: 125%; }
+
+    .btn.secondary {
+      color: var(--cream);
+      background: rgba(255, 255, 255, .04);
+      border-color: rgba(255, 247, 232, .22);
+      box-shadow: none;
+    }
+
+    .btn.play { animation: pulseGlow 2.6s ease-in-out infinite; }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 18px 45px rgba(216, 164, 65, .18); }
+      50% { box-shadow: 0 18px 70px rgba(242, 207, 118, .42); }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 50px;
+      padding-top: 150px;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .75rem;
+      font-weight: 800;
+    }
+
+    .eyebrow::before { content: ""; width: 36px; height: 1px; background: var(--gold); }
+
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; line-height: .95; }
+    h1 { font-size: clamp(4rem, 9vw, 8.8rem); letter-spacing: -.055em; max-width: 850px; }
+    h2 { font-size: clamp(2.7rem, 6vw, 5.8rem); letter-spacing: -.045em; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff7e8, #f2cf76 45%, #d97663);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p, .copy { color: rgba(255, 247, 232, .85); font-size: 1.08rem; line-height: 1.85; }
+    .hero p { max-width: 610px; margin: 28px 0 34px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+    .mini-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+
+    .chip-button {
+      color: var(--cream);
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,247,232,.14);
+      border-radius: 999px;
+      padding: 10px 14px;
+      text-decoration: none;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: transform .25s ease, background .25s ease, color .25s ease;
+    }
+
+    .chip-button:hover { transform: rotate(-2deg) translateY(-3px); background: rgba(242,207,118,.18); color: var(--gold); }
+
+    .bottle-stage { position: relative; min-height: 620px; display: grid; place-items: center; }
+
+    .sunburst {
+      position: absolute;
+      width: min(38vw, 520px);
+      height: min(38vw, 520px);
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(242,207,118,.16), transparent 12%, rgba(217,118,99,.10), transparent 28%, rgba(242,207,118,.18), transparent 45%);
+      animation: spin 32s linear infinite;
+      will-change: transform;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .bottle {
+      position: relative;
+      width: 230px;
+      height: 560px;
+      border-radius: 42px 42px 34px 34px;
+      background: linear-gradient(90deg, #2d1409, #a85f22 22%, #f2c15e 48%, #6c3214 76%, #1e0d07);
+      box-shadow: inset 18px 0 28px rgba(255,255,255,.12), inset -28px 0 45px rgba(0,0,0,.45), 0 35px 90px rgba(0,0,0,.5);
+      transform: rotate(-3deg);
+      animation: floatBottle 5.8s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    @keyframes floatBottle {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-18px) rotate(2deg); }
+    }
+
+    .bottle::before {
+      content: "";
+      position: absolute;
+      top: -118px;
+      left: 61px;
+      width: 108px;
+      height: 150px;
+      border-radius: 24px 24px 8px 8px;
+      background: linear-gradient(90deg, #210d06, #9c581f, #e0a342, #3a1608);
+      box-shadow: inset -18px 0 25px rgba(0,0,0,.32);
+    }
+
+    .bottle::after {
+      content: "";
+      position: absolute;
+      top: -148px;
+      left: 54px;
+      width: 122px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #1c0d09, #f2cf76, #2a1108);
+    }
+
+    .label {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      top: 180px;
+      height: 205px;
+      border-radius: 22px;
+      background: rgba(255, 247, 232, .94);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      box-shadow: inset 0 0 0 1px rgba(157, 92, 34, .25);
+      transition: transform .3s ease;
+    }
+
+    .bottle:hover .label { transform: scale(1.04) rotate(1deg); }
+    .label small { display: block; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); font-size: .62rem; font-weight: 800; margin-bottom: 12px; }
+    .label strong { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem; line-height: .9; }
+    .label span { display: block; margin-top: 14px; font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; color: #6b4323; font-weight: 800; }
+
+    .honey-drop {
+      position: absolute;
+      width: 16px;
+      height: 26px;
+      border-radius: 50% 50% 60% 60%;
+      background: var(--gold);
+      right: 20%;
+      top: 18%;
+      animation: drip 3.4s ease-in-out infinite;
+      opacity: .9;
+      will-change: transform;
+    }
+
+    @keyframes drip {
+      0% { transform: translateY(0) scale(.7); opacity: 0; }
+      25% { opacity: 1; }
+      70% { transform: translateY(115px) scale(1); opacity: .9; }
+      100% { transform: translateY(150px) scale(.4); opacity: 0; }
+    }
+
+    .ticker { overflow: hidden; border-top: 1px solid rgba(242,207,118,.18); border-bottom: 1px solid rgba(242,207,118,.18); background: rgba(255,255,255,.035); padding: 18px 0; white-space: nowrap; }
+    .ticker-track { display: inline-block; animation: ticker 24s linear infinite; color: rgba(255,247,232,.85); letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; font-weight: 800; will-change: transform; }
+    .ticker-track span { margin: 0 28px; color: var(--gold); }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    .intro { display: grid; grid-template-columns: .85fr 1.15fr; gap: 60px; align-items: start; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 45px; }
+
+    .card {
+      position: relative;
+      padding: 30px;
+      min-height: 245px;
+      border: 1px solid rgba(242,207,118,.18);
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+      overflow: hidden;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+      cursor: pointer;
+    }
+
+    .card:hover { transform: translateY(-10px) rotate(.7deg); border-color: rgba(242,207,118,.45); background: linear-gradient(145deg, rgba(242,207,118,.13), rgba(255,255,255,.035)); }
+    .card::after { content: ""; position: absolute; width: 170px; height: 170px; border-radius: 50%; background: rgba(242,207,118,.08); right: -65px; bottom: -65px; transition: transform .3s ease; }
+    .card:hover::after { transform: scale(1.35); }
+    .card .number { color: var(--gold); font-weight: 900; margin-bottom: 45px; display: block; }
+    .card h3 { font-size: 2rem; margin-bottom: 16px; line-height: 1; }
+    .card p { color: rgba(255,247,232,.80); line-height: 1.7; margin: 0; }
+
+    .product {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(255,247,232,.94), rgba(232,214,184,.9));
+      color: var(--ink);
+      border-radius: 46px;
+      margin: 30px 7vw 90px;
+      padding: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product::before { content: "Bee Yourself"; position: absolute; right: -30px; bottom: -28px; font-family: 'Cormorant Garamond', serif; font-size: clamp(4rem, 10vw, 10rem); color: rgba(157,92,34,.07); font-weight: 700; white-space: nowrap; }
+    .product h2 { color: var(--espresso); }
+    .product p { color: rgba(38,24,18,.80); }
+
+    .flavor-notes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .note { padding: 10px 14px; border-radius: 999px; background: rgba(157,92,34,.1); color: #5c3217; font-weight: 900; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; transition: transform .25s ease, background .25s ease; cursor: pointer; }
+    .note:hover { transform: translateY(-4px) rotate(-2deg); background: rgba(216,164,65,.22); }
+
+    .glass-card {
+      border-radius: 34px;
+      min-height: 400px;
+      background: radial-gradient(circle at 50% 22%, rgba(242,207,118,.45), transparent 34%), linear-gradient(145deg, #24120a, #7c3e18 60%, #170b07);
+      box-shadow: 0 30px 70px rgba(38,24,18,.22);
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      transition: transform .35s ease;
+    }
+
+    .glass-card:hover { transform: perspective(900px) rotateY(-5deg) rotateX(3deg) scale(1.02); }
+    .glass-card::before { content: ""; width: 150px; height: 260px; border: 3px solid rgba(255,247,232,.75); border-top: 0; border-radius: 12px 12px 65px 65px; background: linear-gradient(to top, rgba(242,207,118,.55), rgba(242,207,118,.12) 52%, transparent 52%); transform: rotate(-8deg); }
+    .glass-card::after { content: "✦"; position: absolute; top: 48px; right: 58px; color: var(--gold); font-size: 3rem; animation: twinkle 1.8s ease-in-out infinite alternate; }
+    @keyframes twinkle { from { opacity: .35; transform: scale(.85); } to { opacity: 1; transform: scale(1.08); } }
+
+    .ritual { text-align: center; }
+    .ritual h2 { max-width: 880px; margin: 0 auto 24px; }
+    .ritual .copy { max-width: 760px; margin: 0 auto; }
+    .steps { margin-top: 55px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    .step { padding: 28px 20px; border-radius: 28px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,247,232,.12); transition: transform .25s ease, background .25s ease; cursor: pointer; }
+    .step:hover { transform: translateY(-8px); background: rgba(242,207,118,.09); }
+    .step div { width: 54px; height: 54px; margin: 0 auto 18px; display: grid; place-items: center; border-radius: 50%; background: rgba(242,207,118,.14); color: var(--gold); font-weight: 900; transition: transform .35s ease; }
+    .step:hover div { transform: rotate(12deg) scale(1.1); }
+    .step h3 { font-size: 1.55rem; margin-bottom: 8px; }
+    .step p { color: rgba(255,247,232,.75); line-height: 1.6; margin: 0; font-size: .93rem; }
+
+    .dynamic-panel { margin-top: 55px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    .dynamic-button {
+      border: 1px solid rgba(242,207,118,.22);
+      background: rgba(255,255,255,.04);
+      color: var(--cream);
+      padding: 22px;
+      border-radius: 24px;
+      text-align: left;
+      text-decoration: none;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+
+    .dynamic-button strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 8px; }
+    .dynamic-button span { color: rgba(255,247,232,.75); line-height: 1.6; }
+    .dynamic-button:hover { transform: translateY(-8px) scale(1.015); background: rgba(242,207,118,.12); border-color: rgba(242,207,118,.55); }
+
+    .cta { text-align: center; padding: 130px 7vw; background: radial-gradient(circle at center, rgba(242,207,118,.22), transparent 55%); }
+    .cta h2 { max-width: 880px; margin: 0 auto 28px; }
+    .cta p { max-width: 650px; margin: 0 auto 34px; color: rgba(255,247,232,.85); line-height: 1.8; }
+
+    .signup-form {
+      display: flex;
+      gap: 10px;
+      max-width: 500px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .signup-form input {
+      flex: 1;
+      min-width: 200px;
+      padding: 15px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 207, 118, .3);
+      background: rgba(255, 255, 255, .08);
+      color: var(--cream);
+      font-size: 1rem;
+      transition: border-color .25s ease, background .25s ease;
+    }
+
+    .signup-form input::placeholder {
+      color: rgba(255, 247, 232, .5);
+    }
+
+    .signup-form input:focus {
+      outline: none;
+      border-color: rgba(242, 207, 118, .8);
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .signup-form button {
+      white-space: nowrap;
+    }
+
+    .form-message {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      min-height: 20px;
+    }
+
+    .form-message.success {
+      color: #90EE90;
+    }
+
+    .form-message.error {
+      color: #FF6B6B;
+    }
+
+    footer { padding: 36px 7vw; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; border-top: 1px solid rgba(242,207,118,.14); color: rgba(255,247,232,.70); font-size: .88rem; }
+
+    @media (max-width: 980px) {
+      header { padding: 18px 5vw; }
+      nav { display: none; }
+      section { padding: 90px 5vw; }
+      .hero, .intro, .product { grid-template-columns: 1fr; }
+      .bottle-stage { min-height: 560px; }
+      .cards, .steps, .dynamic-panel { grid-template-columns: 1fr 1fr; }
+      .product { margin: 20px 5vw 70px; padding: 42px; }
+    }
+
+    @media (max-width: 620px) {
+      h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
+      .hero { padding-top: 120px; }
+      .hero-actions, .age-actions { align-items: stretch; flex-direction: column; }
+      .btn { width: 100%; }
+      .cards, .steps, .dynamic-panel { grid-template-columns: 1fr; }
+      .product { padding: 30px; border-radius: 32px; }
+      .bottle { width: 185px; height: 455px; }
+      .bottle::before { left: 48px; width: 90px; }
+      .bottle::after { left: 42px; width: 104px; }
+      .label { top: 145px; height: 178px; }
+      .age-card { padding: 34px 24px; }
+      .signup-form {
+        flex-direction: column;
+      }
+      .signup-form input {
+        min-width: auto;
+      }
+      footer { flex-direction: column; }
+    }
+
+    /* Vendor prefixes for better browser support */
+    @supports not (-webkit-background-clip: text) {
+      .gradient-text {
+        color: var(--gold);
+      }
+      .age-card h2 {
+        color: var(--gold);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="age-gate" class="age-gate" role="dialog" aria-labelledby="age-title" aria-modal="true">
+    <div class="age-card">
+      <div class="eyebrow">Aurora Craft Co.</div>
+      <h2 id="age-title">Are you 18 or older?</h2>
+      <p>This website contains information about an alcoholic beverage. Please confirm you are of legal drinking age in your location before entering.</p>
+      <div class="age-actions">
+        <button class="btn play" id="age-confirm" aria-label="Confirm you are 18 or older and enter the site">Yes, enter site →</button>
+        <a class="btn secondary" href="https://www.google.com" aria-label="Exit the site">No, exit</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-honey orb-one" aria-hidden="true"></div>
+  <div class="floating-honey orb-two" aria-hidden="true"></div>
+
+  <header>
+    <a class="logo" href="#top">Aurora</a>
+    <nav>
+      <a href="#story">Story</a>
+      <a href="#craft">Craft</a>
+      <a href="#taste">Taste</a>
+      <a href="#ritual">Ritual</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Formulated & made in Puerto Rico</div>
+        <h1><span class="gradient-text">Honey-finished</span><br>rum spirit.</h1>
+        <p>Aurora Craft Co. creates a premium rum spirit finished with real honey for a smooth, golden, modern sipping experience. Refined, warm, and dynamic without losing its luxury edge.</p>
+        <div class="hero-actions">
+          <a class="btn play" href="#taste">Discover the taste →</a>
+          <a class="btn secondary" href="#story">Explore the craft</a>
+        </div>
+        <div class="mini-actions">
+          <a class="chip-button" href="#craft">Small batch energy</a>
+          <a class="chip-button" href="#ritual">Serving ritual</a>
+          <a class="chip-button" href="#contact">Launch list</a>
+        </div>
+      </div>
+
+      <div class="bottle-stage" aria-label="Premium honey finished rum bottle illustration">
+        <div class="sunburst" aria-hidden="true"></div>
+        <div class="honey-drop" aria-hidden="true"></div>
+        <div class="bottle" aria-hidden="true">
+          <div class="label">
+            <div>
+              <small>Aurora Craft Co.</small>
+              <strong>Honey<br>Reserve</strong>
+              <span>Finished with honey</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Golden by nature</span> Honey-finished rum spirit <span>Made in Puerto Rico</span> Smooth modern sip <span>Bee Yourself</span> Golden by nature <span>Honey-finished rum spirit</span> Made in Puerto Rico
+      </div>
+    </div>
+
+    <section id="story" class="intro">
+      <div>
+        <div class="eyebrow">The story</div>
+        <h2>Not flavored. Finished.</h2>
+      </div>
+      <div>
+        <p class="copy">Aurora is built around a simple idea: honey can do more than sweeten. It can soften, round, and transform a rum spirit into something smoother, warmer, and more memorable.</p>
+        <p class="copy">The rum is selected, then formulated and made in Puerto Rico with a honey-finished profile designed for sipping, cocktails, and golden-hour moments.</p>
+        <div class="dynamic-panel">
+          <a class="dynamic-button" href="#craft"><strong>Crafted</strong><span>Formulated with intention in Puerto Rico.</span></a>
+          <a class="dynamic-button" href="#taste"><strong>Golden</strong><span>Honey finish, warm body, smooth profile.</span></a>
+          <a class="dynamic-button" href="#ritual"><strong>Social</strong><span>Built for pours, cocktails, and shared moments.</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="craft">
+      <div class="eyebrow">The craft</div>
+      <h2>Premium is in the balance.</h2>
+      <div class="cards">
+        <article class="card"><span class="number">01</span><h3>Selected rum</h3><p>A smooth rum spirit base gives Aurora its warmth, structure, and depth.</p></article>
+        <article class="card"><span class="number">02</span><h3>Real honey</h3><p>Honey is used as a finishing signature, not a candy-like cover-up.</p></article>
+        <article class="card"><span class="number">03</span><h3>Puerto Rican formulation</h3><p>The final blend is crafted and made in Puerto Rico with a modern luxury point of view.</p></article>
+      </div>
+    </section>
+
+    <section id="taste" class="product">
+      <div>
+        <div class="eyebrow">Tasting profile</div>
+        <h2>Smooth, golden, and quietly bold.</h2>
+        <p class="copy">Designed to feel premium from the first pour: warm rum character, silky honey finish, soft spice, and a smooth afterglow. Sweetness is present but restrained.</p>
+        <div class="flavor-notes">
+          <span class="note">Honey</span>
+          <span class="note">Vanilla</span>
+          <span class="note">Oak</span>
+          <span class="note">Caramel</span>
+          <span class="note">Golden spice</span>
+        </div>
+      </div>
+      <div class="glass-card" aria-label="Glass of honey finished rum"></div>
+    </section>
+
+    <section id="ritual" class="ritual">
+      <div class="eyebrow">The ritual</div>
+      <h2>Pour it slow. Let it glow.</h2>
+      <p class="copy">Aurora is made for elevated moments: neat, over one large cube, or as the golden signature in a premium cocktail.</p>
+      <div class="steps">
+        <div class="step"><div>1</div><h3>Pour</h3><p>Serve neat or over one large cube.</p></div>
+        <div class="step"><div>2</div><h3>Glow</h3><p>Let the honey finish open in the glass.</p></div>
+        <div class="step"><div>3</div><h3>Mix</h3><p>Use in tropical, citrus, or coffee cocktails.</p></div>
+        <div class="step"><div>4</div><h3>Share</h3><p>Made for golden-hour moments and premium gatherings.</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="cta">
+      <div class="eyebrow">Coming soon</div>
+      <h2>Join the golden list.</h2>
+      <p>Be first to hear about tastings, launch drops, cocktail previews, and Aurora Craft Co. experiences in Puerto Rico.</p>
+      <form class="signup-form" id="signup-form">
+        <input 
+          type="email" 
+          placeholder="Enter your email" 
+          required 
+          aria-label="Email address for launch list signup"
+        >
+        <button type="submit" class="btn play">Request launch access →</button>
+        <div class="form-message" id="form-message" aria-live="polite" aria-atomic="true"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <span>© Aurora Craft Co. All rights reserved.</span>
+    <span>Honey-finished rum spirit. Formulated and made in Puerto Rico.</span>
+  </footer>
+
+  <script>
+    // Age Gate Management
+    const ageGate = document.getElementById('age-gate');
+    const ageConfirm = document.getElementById('age-confirm');
+    const STORAGE_KEY = 'aurora_age_verified';
+    const VERIFICATION_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+    function verifyAge() {
+      const expirationTime = Date.now() + VERIFICATION_DURATION;
+      localStorage.setItem(STORAGE_KEY, expirationTime.toString());
+      ageGate.classList.add('hidden');
+      ageGate.setAttribute('aria-hidden', 'true');
+      ageConfirm.blur();
+    }
+
+    function checkAgeVerification() {
+      const storedTime = localStorage.getItem(STORAGE_KEY);
+      if (storedTime) {
+        const expirationTime = parseInt(storedTime, 10);
+        if (Date.now() < expirationTime) {
+          verifyAge();
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
+    }
+
+    ageConfirm.addEventListener('click', (e) => {
+      e.preventDefault();
+      verifyAge();
+    });
+
+    // Fallback: Show age gate on page load if not verified
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAgeVerification();
+      
+      // Set focus to age gate when it's visible
+      if (!ageGate.classList.contains('hidden')) {
+        ageConfirm.focus();
+      }
+    });
+
+    // Email Signup Form
+    const signupForm = document.getElementById('signup-form');
+    const formMessage = document.getElementById('form-message');
+
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const emailInput = signupForm.querySelector('input[type="email"]');
+      const email = emailInput.value.trim();
+
+      // Basic client-side validation
+      if (!email) {
+        showFormMessage('Please enter a valid email address.', 'error');
+        return;
+      }
+
+      // Clear previous message
+      formMessage.textContent = '';
+
+      try {
+        // Simulate form submission (replace with actual API endpoint)
+        // const response = await fetch('/api/signup', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ email })
+        // });
+
+        // For now, simulate success
+        showFormMessage('✓ Successfully added to launch list! Check your email.', 'success');
+        emailInput.value = '';
+        
+        // Auto-clear message after 5 seconds
+        setTimeout(() => {
+          formMessage.textContent = '';
+        }, 5000);
+      } catch (error) {
+        showFormMessage('Error signing up. Please try again later.', 'error');
+        console.error('Signup error:', error);
+      }
+    });
+
+    function showFormMessage(message, type) {
+      formMessage.textContent = message;
+      formMessage.className = `form-message ${type}`;
+    }
+
+    // Smooth scroll handling for fixed header
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#age-gate' && href !== '#top') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
